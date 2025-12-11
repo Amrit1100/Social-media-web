@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyBlog</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="favicon-32x32.png" type="image/x-icon">
+</head>
+
+<body>
+  <div class="backvanta"></div>
+  <nav>
+    <div class="logo"><span>S</span>cribe<span>H</span>ub</div>
+
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/profile">Profile</a>
+      <a href="/blogs">Blogs</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+    </div>
+
+    <div class="auth-btns">
+      <a href="/login">Login</a>
+      <a href="/signup">Signup</a>
+      <div class="logout">Logout</div>
+    </div>
+  </nav>
+
+  <h1 class="heading">Welcome to <span>ScribeHub</span></h1>
+  <p class="subheading">A platform where you can create, share, and explore blogs with likes and comments.</p>
+
+  <div class="container">
+
+    <!-- CARD 1 -->
+    <div class="card">
+      <div class="card-header">
+        <img src="Amrit.jpeg" alt="Person">
+        <strong class="username"><span>J</span>ohn <span>D</span>oe</strong>
+
+      </div>
+      <h2>Title of Blog</h2>
+      <div class="blog-content">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel odio nec mi tempor dignissim.
+      </div>
+      <div class="actions">
+        <button>Like ❤️</button>
+        <button>Comment 💬</button>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script>
+      var setVanta = () => {
+        if (window.VANTA) window.VANTA.NET({
+          el: ".s-page-1 .s-section-1 .s-section",
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          scale: 1.00,
+          scaleMobile: 1.00,
+          color: 0xb67100,
+          backgroundColor: 0x0
+        })
+      }
+      _strk.push(function () {
+        setVanta()
+        window.edit_page.Event.subscribe("Page.beforeNewOneFadeIn", setVanta)
+      })
+    </script>
+    <script src="three.r134.min.js"></script>
+    <script src="vanta.net.min.js"></script>
+    <script>
+      VANTA.NET({
+        el: ".backvanta",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0xb67100,
+        backgroundColor: 0x0
+      })
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: black;
+      overflow-x: hidden;
+    }
+
+    nav {
+      display: flex;
+      font-size: 18px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 45px;
+      /* background-color: #80808030; */
+      /* background: linear-gradient(90deg, #6a11cb, #2575fc); */
+      color: white;
+      /* position: sticky; */
+      top: 0;
+      z-index: 1000;
+      /* box-shadow: -4px 2px 20px; */
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .logo span{
+      color: #FACC15;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: color 0.3s, transform 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #EAB308;
+      transform: scale(1.05);
+      text-shadow: 0 0 10px #FACC15
+    }
+
+    .auth-btns {
+      display: flex;
+      gap: 15px;
+    }
+
+    .auth-btns a {
+      padding: 8px 16px;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: bold;
+      background: #FACC15;
+      color: black;
+      transition: background 0.3s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .logout{
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: bold;
+       background: #FACC15;
+      color: black;
+      transition: background 0.3s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .logout:hover{
+      background: #EAB308;
+      color: black;
+      transform: translateY(-2px);
+      box-shadow: 0 0 10px #FACC15
+    }
+
+    .auth-btns a:hover {
+      transform: translateY(-2px);
+      background: #EAB308;
+      box-shadow: 0 0 10px #FACC15
+    }
+
+    .account{
+      display: flex;
+      gap: 5px;
+      align-items: center;
+}
+
+    .heading{
+      text-align: center;
+      color: white;
+      font-size: 40px;
+      margin-top: 40px;
+    }
+
+    .heading span{
+      color: #FACC15;
+    }
+
+    .subheading{
+      color: grey;
+      font-size: 24px;
+      text-align: center;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+  
+      .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: auto;
+      margin-top: 40px;
+      z-index: 2;
+    }
+
+    .card {
+      /* background: #6060601c; */
+      background-color: #1A1A1A;
+      border: 1px solid #2D2D2D;
+      border-radius: 12px;
+      overflow: hidden;
+      /* box-shadow: 0 4px 10px rgba(0,0,0,0.1); */
+      transition: 0.3s;
+      padding: 34px;
+      margin: 30px;
+      border: 1px solid #FACC15;
+      color: white;
+      /* box-shadow: 0 0 10px #FACC15 */
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 10px #FACC15
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .card-header .username{
+      font-size: 24px;
+    }
+
+    .username span{
+      color: #FACC15;
+    }
+
+    .card-header img {
+      width: 85px;
+      height: 85px;
+      border-radius: 100%;
+      object-fit: cover;
+    }
+
+    .blog-image {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .blog-content {
+      color: white;
+      margin-top: 15px;
+    }
+
+    .card h2{
+      margin-top: 15px;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+
+    .actions button {
+      padding: 8px 15px;
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      background: #FACC15;
+      color: white;
+      transition: 0.3s;
+      color: black;
+    }
+
+    .actions button:hover {
+      background: #e4ba10;
+    }
+
+    .backvanta{
+      min-height: 100vh;
+      position: absolute;
+      min-width: 100vw;
+      z-index: -1;
+    }

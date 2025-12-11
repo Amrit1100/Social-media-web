@@ -1,0 +1,500 @@
+/* Reset some default styles */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+      font-family: "Poppins", sans-serif;
+      background-color: black;
+      overflow-x: hidden;
+    }
+
+.preload{
+  inset: 0;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  opacity: 1;
+  z-index: 2000;
+  transition: 0.5s;
+}
+
+.preload h1{
+  color: #EAB308;
+  font-size: 100px;
+}
+
+.hidepreload{
+ opacity: 0;
+ z-index: -100;
+}
+
+
+    nav {
+      display: flex;
+      font-size: 18px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 45px;
+      /* background-color: #80808030; */
+      /* background: linear-gradient(90deg, #6a11cb, #2575fc); */
+      color: white;
+      /* position: sticky; */
+      top: 0;
+      z-index: 1000;
+      /* box-shadow: -4px 2px 20px; */
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .logo span{
+      color: #FACC15;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: color 0.3s, transform 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #EAB308;
+      transform: scale(1.05);
+      text-shadow: 0 0 10px #FACC15
+    }
+
+    .auth-btns {
+      display: none;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .auth-btns a {
+      padding: 8px 16px;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: bold;
+      background: #FACC15;
+      color: black;
+      transition: background 0.3s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .logout{
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: bold;
+       background: #FACC15;
+      color: black;
+      transition: background 0.3s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .logout:hover{
+      background: #EAB308;
+      color: black;
+      transform: translateY(-2px);
+      box-shadow: 0 0 10px #FACC15
+    }
+
+    .auth-btns a:hover {
+      transform: translateY(-2px);
+      background: #EAB308;
+      box-shadow: 0 0 10px #FACC15
+    }
+
+    .svgandname{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .account{
+      gap: 30px;
+      align-items: center;
+      display: none;
+    }
+
+
+    .showauth{
+      display: flex;
+    }
+
+
+
+/* Main profile container */
+.profile-container {
+  width: 74%;
+  margin: auto;
+  /* background: #232323; */
+  border-radius: 16px;
+  /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); */
+  padding: 42px;
+  animation: fadeIn 0.5s ease-in-out;
+  margin-top: 40px;
+  color: white;
+  /* box-shadow:  0 0 10px #FACC15; */
+  /* border: 2px solid yellow; */
+  border-top: 2px solid white;
+}
+
+/* User header (image + name) */
+.user-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.user-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  /* border: 3px solid #e60023; */
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  border: 4px solid white;
+}
+
+.user-image:hover {
+  transform: scale(1.05);
+  box-shadow:  0 0 10px #FACC15;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-name {
+  font-size: 42px;
+  color: white
+}
+
+.user-bio {
+  font-size: 0.95rem;
+  color: #777;
+  margin-top: 4px;
+}
+
+.editprofile{
+  background-color: #FACC15;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.editprofile:hover{
+  transform: scale(1.05);
+}
+
+/* Modal css */
+/* Modal background */
+.modal {
+  display: flex;
+  position: fixed;
+  top: 0; left: 0;
+  width: 0%; height: 0%;
+  background: #00000080;
+  transition:  0.2s ease-in-out;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.74);
+  overflow: hidden;
+}
+
+/* Modal box */
+.modal-content {
+  background: linear-gradient(90deg,rgba(0, 0, 0, 1) 0%, rgba(64, 57, 57, 1) 22%, rgba(128, 119, 94, 1) 77%, rgba(204, 153, 12, 1) 93%, rgba(237, 195, 7, 1) 100%);
+  /* width: 420px; */
+  padding: 50px;
+  min-width: 50%;
+  min-height: 70%;
+  border-radius: 10px;
+  /* box-sizing: border-box; */
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+.modal-content label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.show{
+  height: 100%;
+  width: 100%;
+}
+
+.modal-actions button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#cancelBtn {
+  background: #eee;
+  margin-right: 10px;
+}
+
+#saveBtn {
+  background: green;
+  color: white;
+}
+
+
+/* Background Overlay */
+.photo-overlay {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(3px);
+  justify-content: center;
+  align-items: center;
+  z-index: -1000;
+  opacity: 0;
+  transition: all 0.3s ease-in;
+}
+
+.showPhotoModal{
+  opacity: 1;
+  z-index: 2000;
+}
+
+/* Modal Box */
+.photo-box {
+  background: #ffffff;
+  padding: 20px;
+  width: 320px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+/* Buttons */
+.photo-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.selectphotoinput{
+  display: none;
+}
+
+
+.selectphoto {
+  background: #007bff;
+  display: block;
+  color: white;
+  text-decoration: none;
+}
+.selectphoto:hover {
+  background: #0066d6;
+}
+
+.uploadphoto{
+  display: none;
+}
+
+.showuploadphoto{
+  display: block;
+  background-color: green;
+  color: white;
+}
+
+.removephoto {
+  background: #dc3545;
+  color: white;
+}
+.removephoto:hover {
+  background: #b92a36;
+}
+
+.cancelphoto {
+  background: #e0e0e0;
+}
+.cancelphoto:hover {
+  background: #cacaca;
+}
+
+.hiddenphoto {
+  display: none;
+}
+
+#selectedFileBox {
+  margin-top: 10px;
+  padding: 8px;
+  background: #eee;
+  border-radius: 6px;
+  width: fit-content;
+  color: black;
+}
+
+
+/* Divider */
+.divider {
+  margin: 20px 0;
+  border: none;
+  height: 1px;
+  background: #FACC15;
+}
+
+/* Blogs section */
+.section-title {
+  font-size: 24px;
+  color: white;
+  margin-bottom: 15px;
+  border-left: 5px solid #e60023;
+  padding-left: 10px;
+  text-align: center;
+  margin: 30px 0px;
+}
+
+/* Individual blog cards */
+.blog-container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
+.blog-card {
+    border-radius: 10px;
+    background-color: #bbb;
+    height: 500px;
+    transition: all 0.2s ease;
+}
+
+.blog-card .dp{
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.title {
+  font-size: 24px;
+  color: black;
+  margin-top: 6px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.details{
+  padding: 0px 10px;
+  overflow-y: hidden;
+  margin-bottom: 10px;
+}
+
+.info{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: black;
+
+}
+
+.info img{
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  /* border: 4px solid; */
+}
+
+.info h2{
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.content{
+  overflow-y: hidden;
+  color: black;
+}
+
+.blog-card:hover{
+  /* grid-column: 1 / -1; */
+  transform: scale(1.02); 
+  z-index: 10;
+  box-shadow: 0px 0px 10px white;
+}
+
+
+
+/* Simple fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.box{
+  display: flex;
+  justify-content: space-between;
+}
+
+.anchorblog{
+  text-decoration: none;
+}
+.box .addblog{
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 7px;
+  cursor: pointer;
+}

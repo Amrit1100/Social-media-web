@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup | Doc Converter</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body{
+        background: linear-gradient(135deg, #50C9C3, #4A90E2);
+    }
+
+    .flex-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin-top: 20px;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: color 0.3s, transform 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #ffdf6c;
+      transform: scale(1.05);
+    }
+
+    .auth-btns {
+      display: flex;
+      gap: 15px;
+    }
+
+    .auth-btns a {
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      background: white;
+      color: #2575fc;
+      transition: background 0.3s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .logout{
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      background: white;
+      color: #2575fc;
+      transition: background 0.3s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .logout:hover{
+      background: #ffdf6c;
+      color: black;
+      transform: translateY(-2px);
+    }
+
+    .auth-btns a:hover {
+      background: #ffdf6c;
+      color: black;
+      transform: translateY(-2px);
+    }
+
+    .signup-container {
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .signup-container h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .input-group {
+      position: relative;
+      margin: 15px 0;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 40px 12px 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.3s ease;
+    }
+
+    .input-group input:focus {
+      border-color: #4A90E2;
+    }
+
+    .input-group i {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #777;
+    }
+
+    .signup-btn {
+      width: 100%;
+      padding: 12px;
+      background: #4A90E2;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .signup-btn:hover {
+      background: #3a78c2;
+      transform: translateY(-2px);
+    }
+
+    .options {
+      margin-top: 15px;
+      font-size: 0.9rem;
+    }
+
+    .options a {
+      color: #4A90E2;
+      text-decoration: none;
+      margin-left: 5px;
+    }
+
+    .social-login {
+      margin-top: 20px;
+    }
+
+    .social-login p {
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      margin: 0 8px;
+      font-size: 1.2rem;
+      color: #fff;
+      background: #4A90E2;
+      padding: 10px;
+      border-radius: 50%;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .social-icons a:hover {
+      background: #3a78c2;
+      transform: translateY(-3px);
+    }
+  </style>
+</head>
+<body>
+   <nav>
+    <div class="logo">MyBlog</div>
+    
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/profile">Profile</a>
+      <a href="/blogs">Blogs</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+    </div>
+
+    <div class="auth-btns">
+    <a href="/login">Login</a>
+    <a href="/signup">Signup</a>
+    <div class="logout">Logout</div>
+    </div>
+
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+  </nav>
+
+  <div class="flex-container">
+  <div class="signup-container">
+    <h2>Create Your Account</h2>
+
+    <div class="form">
+      <div class="input-group">
+        <input type="text" placeholder="Full Name" class="fullname" required>
+        <i class="fas fa-user"></i>
+      </div>
+
+      <div class="input-group">
+        <input type="email" placeholder="Email" class="email" required>
+        <i class="fas fa-envelope"></i>
+      </div>
+
+      <div class="input-group">
+        <input type="password" placeholder="Password" class="password" required>
+        <i class="fas fa-lock"></i>
+      </div>
+
+      <div class="input-group">
+        <input type="password" placeholder="Confirm Password" class="confirmpassword" required>
+        <i class="fas fa-lock"></i>
+      </div>
+
+      <button type="submit" class="signup-btn">Sign Up</button>
+    </div>
+
+    <div class="options">
+      <p>Already have an account? <a href="login.html">Login</a></p>
+    </div>
+
+    <div class="social-login">
+      <p>Or sign up with</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-google"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    const getdetails = async()=>{
+    let response = await fetch("/me", {
+        method : "POST",
+        credentials : "include"
+    })
+
+    let data = await response.json()
+    if (data.msg === "loggedIn"){
+        window.location.href = "http://localhost:3000"
+    }else{
+        
+    }
+}
+getdetails()
+
+   document.querySelector(".signup-btn").addEventListener("click", async()=>{
+    let name = document.querySelector(".fullname").value
+    let email = document.querySelector(".email").value
+    let password = document.querySelector(".password").value
+    let confirmpassword  = document.querySelector(".confirmpassword").value
+    if (!name || !email || !password || !confirmpassword){
+      alert("All Fields are Required!")
+    }else{
+      if(password !== confirmpassword){
+        alert("Passwords don't match")
+      }else{
+        let response = await fetch("/signup", {
+          method : "POST",
+          headers : {
+            "Content-Type" : "application/json"
+          },
+          body : JSON.stringify({name,email,password})
+        })
+
+        let data = await response.json()
+        alert(data.msg)
+        if(data.msg === "success"){
+          window.location.href = "http://localhost:3000/login"
+        }
+      }
+    }
+   })
+  </script>
+</body>
+</html>

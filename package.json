@@ -1,0 +1,22 @@
+{
+  "name": "quora-clone",
+  "version": "1.0.0",
+  "description": "This website will try to provide features as quora provides",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Amrit",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/storage-blob": "^12.29.1",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express.js": "^1.0.0",
+    "mongodb": "^6.20.0",
+    "mongoose": "^8.19.2",
+    "multer": "^2.0.2",
+    "nodemon": "^3.1.10"
+  }
+}
