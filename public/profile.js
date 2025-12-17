@@ -16,35 +16,6 @@ const getdetails = async () => {
 }
 userState = getdetails()
 
-function createBlogCard({
-  title,
-  authorImage,
-  authorName,
-  content
-}) {
-  const card = document.createElement("div");
-  card.className = "blog-card";
-
-  card.innerHTML = `
-      <img src="/dp.jpg" alt="cover" class="dp">
-
-      <div class="title">${title}</div>
-
-      <div class="details">
-        <div class="info">
-          <img src="${authorImage}" alt="author">
-          <h2>${authorName}</h2>
-        </div>
-
-        <div class="content">
-          ${content}
-        </div>
-      </div>
-    `;
-
-  return card;
-}
-
 
 
 const getinfo = async () => {
@@ -85,17 +56,18 @@ const getinfo = async () => {
         let blogtitle = blog.title
         let content = blog.content
         console.log(blogtitle, profileurl, data.name, content)
-        const card = document.createElement("a");
-        card.href = `/blog/${blogid}`
-        card.className = "blog-card";
-        card.innerHTML = `
-      <img src="/dp.jpg" alt="cover" class="dp">
+        const card = document.createElement("div");
+  card.className = "blog-card";
+
+  card.innerHTML = `
+    <a href="/blog/${blogid}">
+      <img src="/dp.jpg" alt="" class="dp">
 
       <div class="title">${blogtitle}</div>
 
       <div class="details">
         <div class="info">
-          <img src = "${profileurl}" alt="author">
+          <img src="${profileurl}" alt="">
           <h2>${data.name}</h2>
         </div>
 
@@ -103,7 +75,13 @@ const getinfo = async () => {
           ${content}
         </div>
       </div>
-    `;
+    </a>
+
+    <div class="edits">
+      <div class="edit">Edit</div>
+      <div class="delete">Delete</div>
+    </div>
+  `;
       blogContainer.append(card)
       }
 
@@ -223,6 +201,7 @@ document.querySelector(".uploadphoto").addEventListener("click", async () => {
     alert("No Files Selected!")
   }
 })
+
 
 document.querySelector(".plus").addEventListener("click", ()=>{
   document.querySelector(".contplusmodal").classList.add("showcontplusmodal")

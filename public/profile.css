@@ -13,7 +13,6 @@ body {
     }
 
 .preload{
-  inset: 0;
   background-color: black;
   display: flex;
   align-items: center;
@@ -53,6 +52,10 @@ body {
       top: 0;
       z-index: 1000;
       /* box-shadow: -4px 2px 20px; */
+      position: sticky;
+      top: 0px;
+      background-color: rgba(0, 0, 0, 0.681);
+      backdrop-filter: blur(10px);
     }
 
     .logo {
@@ -227,7 +230,7 @@ body {
   align-items: center;
   transition: all 0.2s linear;
   z-index: -2000;
-  position: absolute;
+  position: fixed;
   overflow: hidden;
 }
 .plusmodal{
@@ -477,13 +480,19 @@ body {
   margin-top: 40px;
 }
 .blog-card {
-  text-decoration: none;
+    text-decoration: none;
     border-radius: 10px;
     background-color: #bbb;
     height: 500px;
     transition: all 0.2s ease;
+    overflow-y: hidden;
+    display: block;
+    position: relative;
 }
 
+.blog-card a{
+  text-decoration: none;
+}
 .blog-card .dp{
   height: 200px;
   width: 100%;
@@ -513,6 +522,8 @@ body {
   align-items: center;
   color: black;
   margin-top: 10px;
+  overflow-y: hidden
+  ;
 }
 
 .info img{
@@ -529,9 +540,9 @@ body {
 }
 
 .content{
-  overflow-y: hidden;
   color: black;
   margin-top: 15px;
+  overflow-y: hidden;
 }
 
 .blog-card:hover{
@@ -545,6 +556,42 @@ body {
   display: none;
 }
 
+
+.edits{
+  position: absolute;
+  bottom: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.453);
+  z-index: 200;
+  opacity: 0;
+  transition: 0.2s linear;
+}
+
+.edits div{
+  cursor: pointer;
+}
+
+.edit{
+  padding: 5px 20px;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+} 
+
+.delete{
+  background-color: red;
+  color: white;
+  padding: 5px 20px;
+  border-radius: 5px;
+}
+
+.blog-card:hover .edits{
+  opacity: 1;
+}
 
 
 /* Simple fade-in animation */

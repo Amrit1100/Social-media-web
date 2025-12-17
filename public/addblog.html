@@ -1,172 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Add Blog</title>
-  <style>
-    /* ---------- General Reset ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    body {
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    /* ---------- Form Container ---------- */
-    .container {
-      background: #fff;
-      width: 100%;
-      max-width: 600px;
-      border-radius: 16px;
-      padding: 30px 25px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-      animation: fadeIn 0.6s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ---------- Title ---------- */
-    .container h2 {
-      text-align: center;
-      color: #333;
-      margin-bottom: 25px;
-      font-weight: 600;
-    }
-
-    /* ---------- Input Fields ---------- */
-    label {
-      font-weight: 500;
-      color: #444;
-      display: block;
-      margin-bottom: 8px;
-      font-size: 15px;
-    }
-
-    input[type="text"],
-    textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 18px;
-      border: 2px solid #ddd;
-      border-radius: 8px;
-      font-size: 15px;
-      transition: border 0.3s ease;
-      resize: none;
-    }
-
-    input[type="text"]:focus,
-    textarea:focus {
-      border-color: #2575fc;
-      outline: none;
-    }
-
-    textarea {
-      height: 180px;
-    }
-
-    /* ---------- Button ---------- */
-    button {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      border: none;
-      border-radius: 8px;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
-
-    button:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(37, 117, 252, 0.4);
-    }
-
-    /* ---------- Responsive ---------- */
-    @media (max-width: 600px) {
-      .container {
-        padding: 20px 15px;
-      }
-
-      h2 {
-        font-size: 22px;
-      }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile | Quora Clone</title>
+  <link rel="shortcut icon" href="favicon-32x32.png" type="image/x-icon">
+  <link rel="stylesheet" href="addblog.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
+
 <body>
-  <div class="container">
-    <h2>Add a New Blog</h2>
-    <div class="form">
-      <label for="title">Blog Title</label>
-      <input type="text" id="title" name="title" placeholder="Enter blog title" class="title" required />
+  <nav>
+    <div class="logo"><span>S</span>cribe<span>H</span>ub</div>
 
-      <label for="content">Blog Content</label>
-      <textarea id="content" name="content" placeholder="Write your blog content here..." class="content" required></textarea>
-
-      <button type="submit" class="publish">Publish Blog</button>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/profile">Profile</a>
+      <a href="/blogs">Blogs</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
     </div>
-  </div>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script>
-    const getdetails = async()=>{
-    let response = await fetch("/me", {
-        method : "POST",
-        credentials : "include"
-    })
 
-    let data = await response.json()
-    if (data.msg === "NotloggedIn"){
-        window.location.href = "http://localhost:3000"
-    }
-  }
-    getdetails()
-        
-    document.querySelector(".publish").addEventListener("click", async()=>{
-          let title = document.querySelector(".title").value
-          let content = document.querySelector(".content").value
-          if (!title || !content){
-            alert("All Fields are Required!")
-          }else{
-            let response = await fetch("/add-blog", {
-              method : "POST",
-              headers : {
-                "Content-Type" : "application/json"
-              },
-              body : JSON.stringify({title,content})
-            })
-            let data = await response.json()
-            alert(data.msg)
-            if(data.msg === "success"){
-              Swal.fire({
-              title: 'Success!',
-              text: 'Your Blog has been added',
-              icon: 'success',
-              confirmButtonText: 'OK'
-            })
-              document.querySelector(".title").value = ""
-              document.querySelector(".content").value = ""
-              
-            }
-          }
-        })
+    <div class="account">
+      <div class="svgandname">
+        <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" aria-hidden="true">
+            <path fill="currentColor"
+              d="M12 12.5a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Zm0 1.5c-4.25 0-7.5 2.1-7.5 4.7V21h15v-2.3c0-2.6-3.25-4.7-7.5-4.7Z" />
+          </svg></div>
+        <div class="accountname">Amritpreet Singh</div>
+      </div>
+      <div class="logout">Logout</div>
+    </div>
+
+    <div class="auth-btns">
+      <a href="/login">Login</a>
+      <a href="/signup">Signup</a>
+    </div>
+  </nav>
+
+
+  <div class="container">
     
+  </div>
 
-  </script>
-</body>
-</html>
+  <script src="addblog.js"></script>
+  </body>
+  </html>

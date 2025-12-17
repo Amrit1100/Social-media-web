@@ -17,13 +17,13 @@
       justify-content: space-between;
       align-items: center;
       padding: 25px 45px;
-      /* background-color: #80808030; */
-      /* background: linear-gradient(90deg, #6a11cb, #2575fc); */
       color: white;
-      /* position: sticky; */
       top: 0;
       z-index: 1000;
-      /* box-shadow: -4px 2px 20px; */
+      position: sticky;
+      top: 0px;
+      background-color: rgba(0, 0, 0, 0.681);
+      backdrop-filter: blur(10px);
     }
 
     .logo {
@@ -55,8 +55,9 @@
     }
 
     .auth-btns {
-      display: flex;
+      display: none;
       gap: 15px;
+      align-items: center;
     }
 
     .auth-btns a {
@@ -94,11 +95,21 @@
       box-shadow: 0 0 10px #FACC15
     }
 
-    .account{
+    .svgandname{
       display: flex;
-      gap: 5px;
       align-items: center;
-}
+      gap: 10px;
+    }
+    .account{
+      gap: 30px;
+      align-items: center;
+      display: none;
+    }
+
+
+    .showauth{
+      display: flex;
+    }
 
     .heading{
       text-align: center;
