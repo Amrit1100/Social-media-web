@@ -79,7 +79,30 @@ app.get('/add-blog', (req, res) => {
 
 app.get("/blog/:slug", async(req,res)=>{
     const slug = req.params.slug
-    res.render("blog", {title : "Testing", content : "This is my first server side rendering", author : "Amrit"})
+    try{
+      let db = client.db("Quora-Clone")
+      let blogs = db.collection("Blogs")
+      let blog = await blogs.findOne({blogid : slug})
+       if(!blog){
+      res.status(400).json({msg : "Blog Not found"})
+    }else{
+        let title = blog.title
+        let content = blog.content
+        let email = blog.email
+        let users = db.collection("Users")
+        let user = await users.findOne({email})
+        if(!user){
+          res.json({msg : "Something wrong with this blog."})
+        }else{
+          let name = user.name
+          res.render("blog", {blogtitle : title, content : content, name : name})
+        }
+      }
+    }catch(err){
+      res.json({msg : "Something went wrong! Please refresh the page"})
+    }
+    
+   
 })
 
 
@@ -179,7 +202,7 @@ app.post("/add-blog", async(req,res)=>{
         res.json({msg : "All Fields are required."})
       }else{
         try{
-           let db = client.db("Quora-Clone")
+          let db = client.db("Quora-Clone")
           let Blogs = db.collection("Blogs")
           let result = await Blogs.insertOne({blogid, email, title, content})
           if(result.acknowledged){
@@ -209,7 +232,6 @@ app.post("/profile", async(req,res)=>{
         let details = await Users.findOne({email})
         let profilephotoslinks = db.collection("profilephotoslinks")
         let profilephotodata = await profilephotoslinks.findOne({email : email})
-        console.log(profilephotodata)
         let profileurl = null
         if(profilephotodata!=null){
           profileurl = profilephotodata.url
@@ -260,7 +282,7 @@ function isLoggedIn(req, res, next) {
   if (req.loggedIn) {
     return next();
   }
-  return res.status(401).json({ msg: "User not logged in." });
+  return res.status(400).json({ msg: "User not logged in." });
 }
 
 app.post(
