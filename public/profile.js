@@ -17,7 +17,6 @@ const getdetails = async () => {
 userState = getdetails()
 
 
-
 const getinfo = async () => {
   let response = await fetch("/profile", {
     method: "POST",
@@ -29,10 +28,8 @@ const getinfo = async () => {
     window.location.href = "http://localhost:3000"
   } else {
     let blogs = data.msg
-    console.log(blogs)
     let username = document.querySelector(".user-name")
     let bio = document.querySelector(".user-bio")
-    console.log(bio)
     document.querySelector(".accountname").innerHTML = data.name
     username.innerHTML = data.name
     let profileurl = data.profileurl
@@ -50,14 +47,13 @@ const getinfo = async () => {
       document.querySelector(".noblog").classList.add("hideblog")
       let blogContainer = document.querySelector(".blog-container")  
       for (let i = 0; i < blogs.length; i++) {
-        console.log(blogs[i])
         let blog = blogs[i]
         let blogid = blog.blogid
         let blogtitle = blog.title
         let content = blog.content
-        console.log(blogtitle, profileurl, data.name, content)
         const card = document.createElement("div");
   card.className = "blog-card";
+  card.id = blogid
 
   card.innerHTML = `
     <a href="/blog/${blogid}">
@@ -78,8 +74,8 @@ const getinfo = async () => {
     </a>
 
     <div class="edits">
-      <div class="edit">Edit</div>
-      <div class="delete">Delete</div>
+      <div class="edit" data-id = '${blogid}'>Edit</div>
+      <div class="delete" data-id = '${blogid}'>Delete</div>
     </div>
   `;
       blogContainer.append(card)
@@ -96,7 +92,6 @@ const getinfo = async () => {
 
 getinfo()
 document.querySelector(".logout").addEventListener("click", async () => {
-  console.log("Button clicked")
   if (userState === "NotloggedIn") {
     alert("User Not Logged In")
   } else {
@@ -190,17 +185,23 @@ document.querySelector(".uploadphoto").addEventListener("click", async () => {
     const file = fileInput.files[0]
     const formData = new FormData
     formData.append("photo", file)
-    console.log(formData)
     let response = await fetch("/uploadphoto", {
       method: "POST",
       body: formData
     })
     let data = await response.json()
-    console.log(data)
   } else {
     alert("No Files Selected!")
   }
 })
+
+document.querySelector(".removephoto").addEventListener("click", async()=>{
+   let response = await fetch("/deleteprofilephoto", {
+    method : "POST"
+   })
+   let data = await response.json()
+   alert(data.msg)
+  })
 
 
 document.querySelector(".plus").addEventListener("click", ()=>{
@@ -211,6 +212,39 @@ document.querySelector(".contplusmodal").addEventListener("click", ()=>{
   document.querySelector(".contplusmodal").classList.remove("showcontplusmodal")
 })
 
+// Delete and Edit Functionality
+
+
+document.querySelector(".blog-container").addEventListener("click", async(e) => {
+  const deleteBtn = e.target.closest(".delete");
+  const editBtn = e.target.closest(".edit");
+
+  if (deleteBtn) {
+    e.preventDefault();
+    const blogid = deleteBtn.dataset.id;
+    try{
+        let response = await fetch("/delete-blog", {
+          method : "POST",
+          headers : {"Content-Type" : "application/json"},
+          body : JSON.stringify({blogid})
+        })
+
+        let data = await response.json()
+        Toastify({ text:data.msg, duration: 3000, gravity: "top", position: "center", close: true, backgroundColor: "#d41313ff", }).showToast();
+        if(data.msg === "Blog Deleted!"){
+          document.getElementById(blogid).remove()
+        }
+    }catch(err){
+       Toastify({ text: `Something went wrong. Error = ${err} Please try again!`, duration: 3000, gravity: "top", position: "center", close: true, backgroundColor: "#d41313ff", }).showToast();
+    }
+  }
+
+  if (editBtn) {
+    e.preventDefault();
+    const blogId = editBtn.dataset.id;
+    console.log("Edit:", blogId);
+  }
+});
 
 
 

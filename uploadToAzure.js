@@ -7,8 +7,6 @@ const fs = require("fs");
 
 async function uploadToAzure(filepath, filename) {
     try {
-        console.log(process.env.AZURE_STORAGE_CONNECTION_STRING)
-        console.log(process.env.AZURE_CONTAINER_NAME)
         const blobService = BlobServiceClient.fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
         const container = blobService.getContainerClient(process.env.AZURE_CONTAINER_NAME);
 

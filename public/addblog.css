@@ -117,4 +117,79 @@ body {
       display: flex;
     }
 
+    .container{
+      width: 80%;
+      border-radius: 10px;
+      padding: 20px;
+      margin : 20px auto;
+      color: white;
+      /* border: 1px solid white; */
+      background: #0f0f0f6e;
+    }
+
+    .container::before {
+  content: "";
+  position: absolute;
+  inset: -2px; /* border thickness */
+  border-radius: inherit;
+  background: linear-gradient(
+    270deg,
+    #ff0080,
+    #7928ca,
+    #00f0ff,
+    #00ff6a,
+    #ffb700,
+    #ff0080
+  );
+  background-size: 400% 400%;
+  animation: gradientBorder 6s linear infinite;
+  z-index: -1;
+}
+
+@keyframes gradientBorder {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+    .title div input{
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0px;
+      font-size: 20px;
+      border-radius: 10px;
+      border: none;
+    }
+
+    textarea{
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0px;
+      font-size: 20px;
+      border-radius: 10px;
+      border: none;
+    }
+
+    .btn{
+      text-align: center;
+    }
+
+    .btn button{
+      width: 30%;
+      padding: 10px;
+      border-radius: 10px;
+      color: white;
+      background-color: rgb(0, 128, 0);
+      font-size: 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+
 

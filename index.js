@@ -1,12 +1,14 @@
 require('dotenv').config();
 const express = require('express')
 const uploadToAzure = require("./uploadToAzure");
+const deleteFromAzure = require("./deleteFromAzure")
 const multer = require("multer")
 const path = require("path")
 const { MongoClient } = require("mongodb");
 const cookieParser = require("cookie-parser");
 const { error, profile } = require('console');
 const { title } = require('process');
+const { console } = require('inspector');
 const app = express()
 const port = 3000
 
@@ -153,8 +155,8 @@ app.post("/login", async(req,res)=>{
       if(result){
         let savedpassword = result.password
         if(savedpassword === password){
-          res.cookie("login", true, {httpOnly : true})
-          res.cookie("email", email, {httpOnly : true})
+          res.cookie("login", true, {httpOnly : true, sameSite : "strict"})
+          res.cookie("email", email, {httpOnly : true, sameSite : "strict"})
           res.json({msg : `success`})
         }else{
           res.json({msg : "InCorrect Password."})
@@ -300,7 +302,7 @@ app.post(
       let email = req.useremail
       let db = client.db("Quora-Clone")
       let profilephotoslinks = db.collection("profilephotoslinks")
-      let result = await profilephotoslinks.insertOne({email: email, url })
+      let result = await profilephotoslinks.insertOne({email: email, url, azureFileName})
       if (result.acknowledged){
         res.json({ msg: "Uploaded to Azure"});
       }else{
@@ -312,6 +314,65 @@ app.post(
     }
   }
 );
+
+
+// Delete the profile photo
+app.post("/deleteprofilephoto", async(req,res)=>{
+  if(req.loggedIn){
+    let useremail = req.useremail
+    try{
+      let db = client.db("Quora-Clone")
+      let photolinks = db.collection("profilephotoslinks")
+      let result = await photolinks.findOne({email : useremail})
+      if(result){
+          let imagename = result.azureFileName
+          console.log(imagename)
+          let response = await deleteFromAzure(imagename)
+          console.log(response)
+          if(response=="success"){
+            let result = await photolinks.deleteOne({email : useremail})
+            if(result.acknowledged){
+              res.json({msg : "Profile Photo Deleted successfully."})
+            }else{
+               res.json({msg : "Something went wrong deleting the image. Please try again later."})
+            }
+          }else{
+            res.json({msg : "Something went wrong deleting the image. Please try again later."})
+          }
+      }
+    }catch(err){
+        res.json({msg : err})
+    } 
+      
+}else{
+    res.json({msg : "User not logged In"})
+  }
+})
+
+// Delete Blog
+app.post("/delete-blog", async(req,res)=>{
+  if(req.loggedIn){
+      let blogid = req.body.blogid
+      try{
+        let db = client.db("Quora-Clone")
+        let blogs = db.collection("Blogs")
+        let result = await blogs.deleteOne({blogid})
+        if (result.acknowledged){
+          res.json({msg : "Blog Deleted!"})
+        }else{
+          res.json({msg : "Something went wrong. Please try again"})
+        }
+      }catch(err){
+          res.json({msg : `Something Went wrong.Please try again`})
+      }
+
+
+  }else{
+    res.status(400).json({msg : "User not Logged In"})
+  }
+})
+
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

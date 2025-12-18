@@ -294,6 +294,7 @@ body {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.74);
   overflow: hidden;
+  z-index: 1000;
 }
 
 /* Modal box */
@@ -566,7 +567,7 @@ body {
   width: 100%;
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.453);
-  z-index: 200;
+  z-index: 500;
   opacity: 0;
   transition: 0.2s linear;
 }
