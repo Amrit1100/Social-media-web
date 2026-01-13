@@ -10,6 +10,7 @@ const getdetails = async () => {
     document.querySelector(".auth-btns").classList.add("showauth")
     return "NotloggedIn"
   } else {
+    document.querySelector(".accountname").innerHTML = data.name
     document.querySelector(".account").classList.add("showauth")
     return "loggedIn"
   }

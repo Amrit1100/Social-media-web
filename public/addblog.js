@@ -11,6 +11,7 @@ const getdetails = async () => {
     window.location.href = "http://localhost:3000"
     return "NotloggedIn"
   } else {
+    document.querySelector(".accountname").innerHTML = data.name
     document.querySelector(".account").classList.add("showauth")
     return "loggedIn"
   }

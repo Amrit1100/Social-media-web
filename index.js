@@ -18,11 +18,14 @@ app.set("views", "./templates");
 app.use(express.json())
 app.use(cookieParser())
 
+
+
 app.use((req,res,next)=>{
     let cookies = req.cookies
     if(cookies.login){
       req.loggedIn = true
       req.useremail = cookies.email
+      req.username = cookies.username
     }else{
       req.loggedIn = false
     }
@@ -79,6 +82,9 @@ app.get('/add-blog', (req, res) => {
   res.sendFile(path.join(__dirname, "/public/addblog.html"))
 })
 
+app.get("/blogs", (req,res)=>{
+  res.sendFile(path.join(__dirname, "/public/blogs.html"))
+})
 app.get("/blog/:slug", async(req,res)=>{
     const slug = req.params.slug
     try{
@@ -154,9 +160,11 @@ app.post("/login", async(req,res)=>{
       let result = await users.findOne({ email })
       if(result){
         let savedpassword = result.password
+        let username = result.name
         if(savedpassword === password){
           res.cookie("login", true, {httpOnly : true, sameSite : "strict"})
           res.cookie("email", email, {httpOnly : true, sameSite : "strict"})
+          res.cookie("username", username, {httpOnly : true, sameSite : "strict"})
           res.json({msg : `success`})
         }else{
           res.json({msg : "InCorrect Password."})
@@ -188,7 +196,8 @@ app.post("/logout", (req,res)=>{
 
 app.post("/me", (req,res)=>{
     if(req.loggedIn){
-      res.json({msg: "loggedIn", email : req.useremail})
+      let username = req.username
+      res.json({msg: "loggedIn", email : req.useremail, name : username})
     }else{
       res.json({msg : "NotloggedIn"})
     }
@@ -197,6 +206,7 @@ app.post("/me", (req,res)=>{
 app.post("/add-blog", async(req,res)=>{
     if(req.loggedIn === true){
       let email = req.useremail
+      let username = req.username
       let title = req.body.title
       let content = req.body.content
       let blogid = title.replace(/ /g, "-") +"-" + Date.now().toString()
@@ -206,7 +216,7 @@ app.post("/add-blog", async(req,res)=>{
         try{
           let db = client.db("Quora-Clone")
           let Blogs = db.collection("Blogs")
-          let result = await Blogs.insertOne({blogid, email, title, content})
+          let result = await Blogs.insertOne({blogid, email, username , title, content})
           if(result.acknowledged){
             res.json({msg : "success"})
           }else{
@@ -249,11 +259,18 @@ app.post("/profile", async(req,res)=>{
   }
 })
 
+
 app.post("/getblogs", async(req,res)=>{
-   let db = client.db("Quora-Clone")
-   let Blogs = db.collection("Blogs")
-   let blogs = await Blogs.find({}).toArray()
-   res.status(200).json({blogs})
+   try{
+      let db = client.db("Quora-Clone")
+      let Blogs = db.collection("Blogs")
+      let blogs = await Blogs.find({}).toArray()
+      res.status(200).json({msg : "success", blogs})
+   }catch(err){
+    console.log(err)
+    res.json({msg : "Something went wrong! Please try again."})
+   }
+    
 })
 
 app.post("/changeinfo", async(req,res)=>{
@@ -365,8 +382,6 @@ app.post("/delete-blog", async(req,res)=>{
       }catch(err){
           res.json({msg : `Something Went wrong.Please try again`})
       }
-
-
   }else{
     res.status(400).json({msg : "User not Logged In"})
   }
