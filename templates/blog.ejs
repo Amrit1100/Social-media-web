@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title><%= blogtitle %></title>
-    <link rel="stylesheet" href="/blog.css">
-    <link rel="shortcut icon" href="/favicon-32x32.png" type="image/x-icon">
+  <title>
+    <%= blogtitle %>
+  </title>
+  <link rel="stylesheet" href="/blog.css">
+  <link rel="shortcut icon" href="/favicon-32x32.png" type="image/x-icon">
 </head>
+
 <body>
-    <!-- Navbar -->
-     <nav>
+  <!-- Navbar -->
+  <nav>
     <div class="logo"><span>S</span>cribe<span>H</span>ub</div>
 
     <div class="nav-links">
@@ -20,10 +24,13 @@
 
     <div class="account">
       <div class="svgandname">
-     <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" aria-hidden="true">
-  <path fill="currentColor" d="M12 12.5a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Zm0 1.5c-4.25 0-7.5 2.1-7.5 4.7V21h15v-2.3c0-2.6-3.25-4.7-7.5-4.7Z"/></svg></div> 
-  <div class="accountname">Amritpreet Singh</div></div>
-  <div class="logout">Logout</div>
+        <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" aria-hidden="true">
+            <path fill="currentColor"
+              d="M12 12.5a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Zm0 1.5c-4.25 0-7.5 2.1-7.5 4.7V21h15v-2.3c0-2.6-3.25-4.7-7.5-4.7Z" />
+          </svg></div>
+        <div class="accountname">Amritpreet Singh</div>
+      </div>
+      <div class="logout">Logout</div>
     </div>
 
     <div class="auth-btns">
@@ -31,24 +38,49 @@
       <a href="/signup">Signup</a>
     </div>
   </nav>
-    
+
   <!-- Main Content of Page -->
-   <div class="container">
+  <div class="container">
     <div class="titleimg"><img src="/dp.jpg" alt=""></div>
-    <h1 class="blogtitle"><%= blogtitle %></h1>
+    <h1 class="blogtitle">
+      <%= blogtitle %>
+    </h1>
     <div class="author">
-        <div class="authorimg"><img src="/account.jpg" alt=""></div>
-        <div class="authorname"><%= name %></div>
+      <div class="authorimg"><img src="/account.jpg" alt=""></div>
+      <div class="authorname">
+        <%= name %>
+      </div>
     </div>
 
     <div class="blogcontent">
       <%= content %>
     </div>
 
-   </div>
-
-  
-
-    <script src="/blog.js"></script>
+    <div class="comments">
+      <div class="commentheading">Comments</div>
+      <div class="addcomment">
+        <textarea class="comment-input" rows="1" placeholder="Write your comment..."></textarea>
+        <button class="add-comment-btn">Add comment</button>
+      </div>
+      <div class="commentsbox">
+        <% if (comments.length===0) { %>
+          <p class="no-comments">No comments yet</p>
+          <% }else { %>
+            <% comments.forEach(comment=>{ %>
+              <div class="commentcard">
+                <div class="userinfo">
+                  <img src="/Amrit.jpeg" alt="">
+                  <div class="username"><%=comment.name%></div>
+                </div>
+                <div class="usercomment"><%=comment.comment%></div>
+              </div>
+              <%})%>
+                <% } %>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="/blog.js"></script>
 </body>
+
 </html>

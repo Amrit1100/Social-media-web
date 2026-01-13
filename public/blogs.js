@@ -33,12 +33,15 @@ document.querySelector(".logout").addEventListener("click", async () => {
 
 
 const getblogs = async () => {
+  document.querySelector(".blogscontainer").style.display = "none"
   let response = await fetch("/getblogs", {
     method: "POST",
     headers: { "Content-Type": "application/json" }
   })
   let data = await response.json()
   if (data.msg === "success") {
+    document.querySelector(".blogscontainer").style.display = "grid"
+    document.querySelector(".loaderback").style.display = "none"
     let blogs = data.blogs
     for (let i = 0; i < blogs.length; i++) {
       let blog = blogs[i]

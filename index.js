@@ -97,13 +97,17 @@ app.get("/blog/:slug", async(req,res)=>{
         let title = blog.title
         let content = blog.content
         let email = blog.email
+        let comments = blog.comments
+        if(!comments){
+          comments = []
+        }
         let users = db.collection("Users")
         let user = await users.findOne({email})
         if(!user){
           res.json({msg : "Something wrong with this blog."})
         }else{
           let name = user.name
-          res.render("blog", {blogtitle : title, content : content, name : name})
+          res.render("blog", {blogtitle : title, content : content, name : name, comments : comments})
         }
       }
     }catch(err){
@@ -231,6 +235,32 @@ app.post("/add-blog", async(req,res)=>{
     }else{
       res.json({msg : "User Not logged In"})
     }
+})
+
+app.post("/add-comment", async(req,res)=>{
+   if(req.loggedIn){
+      let name = req.username
+      let comment = req.body.comment
+      let slug = req.body.slug
+      if(!comment){
+        res.json({msg : "Cannot Enter empty comment!"})
+      }else{
+        try{
+          let db = client.db("Quora-Clone")
+          let Blogs = db.collection("Blogs")
+          let result = await Blogs.updateOne({blogid : slug}, {$push : {comments : {name,comment} }})
+          if(result.acknowledged){
+            res.json({msg : "Success"})
+          }else{
+            res.json({msg : "Something went wrong!."})
+          }
+        }catch(err){
+          res.json({msg : "Sommething went wrong. Please try again."})
+        }
+      }
+   }else{
+    res.json({msg : "User not logged In"})
+   }
 })
 
 app.post("/profile", async(req,res)=>{
